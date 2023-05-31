@@ -14,7 +14,7 @@
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Gambar</label>
                         <input type="file" class="form-control" id="defaultFormControlInput" name="gambar"
-                            value="{{old('gambar')}}">
+                            value="{{$resep->gambar}}">
                     </div>
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Judul</label>

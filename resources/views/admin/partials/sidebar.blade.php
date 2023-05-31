@@ -25,8 +25,8 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Master Data</span>
         </li>
-        <li class="menu-item {{ request()->is('admin/kirim-hewan*') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ request()->is('user/artikel*') ? 'active' : '' }}">
+            <a href="{{route('artikel.index')}}" class="menu-link">
                 <i class='menu-icon bx bxs-data'></i>
                 <div>Artikel</div>
             </a>
