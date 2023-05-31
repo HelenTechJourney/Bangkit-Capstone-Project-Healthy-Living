@@ -36,14 +36,17 @@
                                     <td>{{ $item->judul }}</td>
                                     <td>{!! Str::limit($item->deskripsi, 30) !!}</td>
                                     <td>
-                                        <a href="{{route('resep.edit',$item->id)}}" class="btn btn-primary">
-                                            <i class="bx bx-edit me-sm-2"></i>
+                                        <a href="{{route('resep.edit',$item->id)}}" class="btn btn-success btn-sm">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
+                                        <a href="{{route('resep.show',$item->id)}}" class="btn btn-primary btn-sm">
+                                            <i class='bx bxs-show'></i>
                                         </a>
 
                                         <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal"
                                             data-bs-target="#delete-modal-{{ $item->id }}"><span><i
-                                                    class="bx bx-trash me-sm-2"></i> <span
-                                                    class="d-none d-sm-inline-block">Delete</span></span>
+                                                    class="bx bx-trash "></i>
+                                                   </span>
                                         </button>
                                     </td>
                                 </tr>
@@ -53,6 +56,7 @@
                 </div>
             </div>
         </div>
+        @include('admin.resep-makanan.delete')
     </div>
 @endsection
 

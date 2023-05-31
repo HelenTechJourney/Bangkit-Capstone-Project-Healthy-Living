@@ -19,17 +19,17 @@
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="defaultFormControlInput" name="judul" placeholder="Masukan Judul"
-                            value="{{old('judul')}}">
+                            value="{{$resep->judul}}">
                     </div>
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Referensi</label>
                         <input type="text" class="form-control" id="defaultFormControlInput" name="referensi" placeholder="Masukan Referensi"
-                            value="{{old('referensi')}}">
+                            value="{{$resep->referensi}}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-company">Deskripsi</label>
                         <textarea id="deskripsi" type="text" name="deskripsi" cols="30" rows="5"
-                                  class="form-control" style="height: 300px;">{{old('deskripsi')}}</textarea>
+                                  class="form-control" style="height: 300px;">{{$resep->deskripsi}}</textarea>
                     </div>
                     <div class="d-flex justify-content-end">
                        <button type="submit" class="btn btn-primary">Simpan</button>

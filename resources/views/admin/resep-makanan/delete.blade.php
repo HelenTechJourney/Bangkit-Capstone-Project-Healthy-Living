@@ -1,18 +1,19 @@
-<div class="modal fade" id="delete-modal-{{ $guru->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+@foreach ($data as $resep)
+<div class="modal fade" id="delete-modal-{{ $resep->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Guru</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Resep Makanan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <form action="{{ route('guru.destroy', $guru->id) }}" method="post">
+            <form action="{{ route('resep.destroy', $resep->id) }}" method="post">
                 @method('DELETE')
                 @csrf
-                <input type="hidden" name="id" id="id" value="{{ $guru->id }}">
+                <input type="hidden" name="id" id="id" value="{{ $resep->id }}">
                 <div class="modal-body">
-                    Anda yakin ingin menghapus Guru <b>{{ $guru->nama }}</b>
+                    Anda yakin ingin menghapus Guru <b>{{ $resep->judul }}</b>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -28,3 +29,4 @@
         </div>
     </div>
 </div>
+@endforeach
