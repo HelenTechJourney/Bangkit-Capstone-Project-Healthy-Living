@@ -32,7 +32,8 @@
                                   class="form-control" style="height: 300px;">{{old('deskripsi')}}</textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                       <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="{{route('resep.index')}}" class="btn btn-danger me-3">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                   </form>
                 </div>

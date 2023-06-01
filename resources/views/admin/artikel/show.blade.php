@@ -11,7 +11,7 @@
                 <div class="card-body mt-3">
                     <div class="mb-3">
                         <h5 class="text-uppercase">Gambar</h5>
-                        <img src="{{asset('images/'.$artikel->gambar)}}" alt="">
+                        <img src="{{asset('images/'.$artikel->gambar)}}" width="30%" alt="">
                     </div>
                     <div class="mb-3">
                         <h5 class="text-uppercase">Judul</h5>

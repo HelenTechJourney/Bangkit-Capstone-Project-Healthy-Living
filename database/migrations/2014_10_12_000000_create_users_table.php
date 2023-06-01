@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('nama');
+            $table->enum('jenis_kelamin', ['Laki - laki', 'Perempuan'])->nullable();
+            $table->integer('usia')->nullable();
+            $table->integer('tinggi_badan')->nullable();
+            $table->integer('berat_badan')->nullable();
+            $table->enum('aktivitas_fisik', ['Tidak aktif', 'Sedikit aktif(aktivitas fisik ringan 1-3 kali seminggu)', 'Aktif(aktivitas fisik ringan 3-5 kali seminggu)', 'Sangat aktif(aktivitas fisik berat 6-7 kali seminggu)', 'Sangat aktif sekali(aktivitas fisik berat setiap hari atau aktivitas fisik berat 2 kali sehari)'])->nullable();
+            $table->string('email');
             $table->string('password');
+            $table->string('roles')->default('member');
             $table->rememberToken();
             $table->timestamps();
         });

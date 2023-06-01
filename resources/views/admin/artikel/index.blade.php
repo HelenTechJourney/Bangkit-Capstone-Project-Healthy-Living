@@ -5,9 +5,10 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
 @endpush
-@include('sweetalert.alert')
 @section('title', 'Artikel')
 @section('content')
+@include('sweetalert::alert')
+
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">Artikel</h4>
 

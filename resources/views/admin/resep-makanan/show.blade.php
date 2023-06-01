@@ -11,19 +11,26 @@
                 <div class="card-body mt-3">
                     <div class="mb-3">
                         <h5 class="text-uppercase">Gambar</h5>
-                        <img src="{{asset('images/'.$resep->gambar)}}" alt="">
+                        <img src="{{asset('images/'.$resep->gambar)}}" width="30%" alt="">
                     </div>
                     <div class="mb-3">
                         <h5 class="text-uppercase">Judul</h5>
                         <p>{{$resep->judul}}</p>
                     </div>
                     <div class="mb-3">
+                        <h5 class="text-uppercase">Author</h5>
+                        <p>{{$resep->author}}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="text-uppercase">Deskripsi</h5>
+                        <p>{!!$resep->deskripsi!!}</p>
+                    </div>
+                    <div class="mb-3">
                         <h5 class="text-uppercase">Referensi</h5>
                         <p>{{$resep->referensi}}</p>
                     </div>
-                    <div class="mb-3">
-                        <h5 class="text-uppercase"> </h5>
-                        <p>{{$resep->referensi}}</p>
+                    <div class="d-flex justify-content-end">
+                        <a href="{{route('resep.index')}}" class="btn btn-danger">Kembali</a>
                     </div>
                 </div>
             </div>

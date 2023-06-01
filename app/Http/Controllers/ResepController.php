@@ -7,6 +7,7 @@ use App\Models\Resep;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ResepController extends Controller
 {
@@ -34,21 +35,19 @@ class ResepController extends Controller
     {
         $user = Auth::user();
 
-        $this->validate($request, ['gambar' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048']);
-
         $foto = $request->file('gambar');
         $destinationPath = 'images/';
-        $profileImage = Str::slug($request->nama) .'-'.Carbon::now()->format('YmdHis')."." . $foto->getClientOriginalExtension();
+        $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
         $foto->move($destinationPath, $profileImage);
 
         Resep::create([
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'referensi' => $request->referensi,
-            // 'author' => $user,
+            'author' => $user->nama,
             'gambar' => $profileImage,
         ]);
-
+        Alert::success("Success", "kamu berhasil menambahkan data");
         return redirect()->route('resep.index');
     }
 
@@ -57,8 +56,8 @@ class ResepController extends Controller
      */
     public function show($id)
     {
-        $resep = Resep::where('id',$id)->first();
-        return view('admin.resep-makanan.show',['resep' => $resep]);
+        $resep = Resep::where('id', $id)->first();
+        return view('admin.resep-makanan.show', ['resep' => $resep]);
     }
 
     /**
@@ -66,8 +65,8 @@ class ResepController extends Controller
      */
     public function edit($id)
     {
-        $resep = Resep::where('id',$id)->first();
-        return view('admin.resep-makanan.edit',['resep' => $resep]);
+        $resep = Resep::where('id', $id)->first();
+        return view('admin.resep-makanan.edit', ['resep' => $resep]);
     }
 
     /**
@@ -76,29 +75,35 @@ class ResepController extends Controller
     public function update(Request $request, $id)
     {
         $user = Auth::user();
-        $resep = Resep::where('id',$id)->first();
-
-        $this->validate($request, ['gambar' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048']);
-        $foto = $request->file('gambar');
-        $destinationPath = 'images/';
-        $profileImage = Str::slug($request->nama) .'-'.Carbon::now()->format('YmdHis')."." . $foto->getClientOriginalExtension();
-        $foto->move($destinationPath, $profileImage);
+        $resep = Resep::where('id', $id)->first();
 
         if ($request->gambar) {
-            $resep->judul = $request->judul;
-            $resep->deskripsi = $request->deskripsi;
-            $resep->referensi = $request->referensi;
-            // $resep->author = $user;
-            $resep->gambar = $profileImage;
-            $resep->save();
-        }else{
-            $resep->judul = $request->judul;
-            $resep->deskripsi = $request->deskripsi;
-            $resep->referensi = $request->referensi;
-            // $resep->author = $user;
-            $resep->save();
-        }
+            $foto = $request->file('gambar');
+            $destinationPath = 'images/';
+            $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $foto->move($destinationPath, $profileImage);
 
+            if ($resep->gambar) {
+                $file_path = public_path() . "/images/" . $resep->gambar;
+                unlink($file_path);
+            }
+
+            $resep->update([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'referensi' => $request->referensi,
+                'author' => $user->nama,
+                'gambar' => $profileImage,
+            ]);
+        } else {
+            $resep->update([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'referensi' => $request->referensi,
+                'author' => $user->nama,
+            ]);
+        }
+        Alert::success("Success", "kamu berhasil memperbarui data");
         return redirect()->route('resep.index');
     }
 
@@ -107,9 +112,32 @@ class ResepController extends Controller
      */
     public function destroy($id)
     {
-        $resep = Resep::where('id',$id)->first();
+        $resep = Resep::where('id', $id)->first();
+        if ($resep->gambar) {
+            $file_path = public_path() . "/images/" . $resep->gambar;
+            unlink($file_path);
+        }
         $resep->delete();
 
+        Alert::success("Success", "kamu berhasil menghapus data");
         return redirect()->route('resep.index');
+    }
+
+    public function resep()
+    {
+        $resep = Resep::get();
+        return response()->json([
+            "message" => "kamu berhasil melihat seluruh data resep",
+            'data' => $resep
+        ]);
+    }
+
+    public function detail_resep($id)
+    {
+        $resep = Resep::where('id',$id)->first();
+        return response()->json([
+            "message" => "kamu berhasil melihat detail data resep",
+            'data' => $resep
+        ]);
     }
 }

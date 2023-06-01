@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ArtikelRequest;
-use App\Http\Requests\ArtikelRequestUpdate;
-use App\Models\artikel;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\artikel;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ArtikelRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\ArtikelRequestUpdate;
 
 class ArtikelController extends Controller
 {
@@ -30,14 +30,14 @@ class ArtikelController extends Controller
 
         $foto = $request->file('gambar');
         $destinationPath = 'images/';
-        $profileImage = Str::slug($request->nama) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+        $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
         $foto->move($destinationPath, $profileImage);
 
         artikel::create([
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'referensi' => $request->referensi,
-            // 'author' => $user,
+            'author' => $user->nama,
             'gambar' => $profileImage,
         ]);
         Alert::success("Success", "kamu berhasil menambahkan data");
@@ -65,16 +65,17 @@ class ArtikelController extends Controller
         if ($request->gambar) {
             $foto = $request->file('gambar');
             $destinationPath = 'images/';
-            $profileImage = Str::slug($request->nama) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
             $foto->move($destinationPath, $profileImage);
-
-            $file_path = public_path() . "/images/" . $artikel->foto;
-            unlink($file_path);
+            if ($artikel->gambar) {
+                $file_path = public_path() . "/images/" . $artikel->gambar;
+                unlink($file_path);
+            }
             $artikel->update([
                'judul' => $request->judul,
                'deskripsi' => $request->deskripsi,
                'referensi' => $request->referensi,
-            //    'author' => $user,
+               'author' => $user->nama,
                'gambar' => $profileImage
             ]);
         } else {
@@ -82,7 +83,7 @@ class ArtikelController extends Controller
                 'judul' => $request->judul,
                'deskripsi' => $request->deskripsi,
                'referensi' => $request->referensi,
-            //    'author' => $user,
+               'author' => $user->nama,
             ]);
         }
         Alert::success("Success", "kamu berhasil memperbarui data");
@@ -96,8 +97,32 @@ class ArtikelController extends Controller
     public function destroy($id)
     {
         $artikel = artikel::where('id', $id)->first();
+        if ($artikel->gambar) {
+            $file_path = public_path() . "/images/" . $artikel->gambar;
+            unlink($file_path);
+        }
         $artikel->delete();
         Alert::success("Success", "kamu berhasil menghapus data");
         return redirect()->route('artikel.index');
     }
+
+    ##api##
+    public function artikel()
+    {
+        $artikel = artikel::get();
+        return response()->json([
+            "message" => "kamu berhasil melihat seluruh data artikel",
+            "data" => $artikel
+        ]);
+    }
+
+    public function detail_artikel($id)
+    {
+        $artikel = artikel::where('id',$id)->first();
+        return response()->json([
+            "message" => "kamu berhasil melihat detail data artikel",
+            "data" => $artikel
+        ]);
+    }
+    ##end api##
 }

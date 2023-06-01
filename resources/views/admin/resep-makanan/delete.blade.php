@@ -13,7 +13,7 @@
                 @csrf
                 <input type="hidden" name="id" id="id" value="{{ $resep->id }}">
                 <div class="modal-body">
-                    Anda yakin ingin menghapus Guru <b>{{ $resep->judul }}</b>
+                    Anda yakin ingin menghapus Resep Makanan <b>{{ $resep->judul }}</b>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

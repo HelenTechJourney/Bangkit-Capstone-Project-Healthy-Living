@@ -1,10 +1,10 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="#" class="app-brand-link">
+        <a href="{{route('dashboard')}}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <img src="{{ asset('front/img/logo/logo.png ') }}" width="50" alt="">
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">admin</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2 text-uppercase">{{Auth::user()->nama}}</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -16,8 +16,8 @@
 
     <ul class="menu-inner py-1 mb-5">
         <!-- Page -->
-        <li class="menu-item">
-            <a href="#" class="menu-link">
+        <li class="menu-item  {{ request()->is('user/dashboard*') ? 'active' : '' }}">
+            <a href="{{route('dashboard')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div>Dashboard</div>
             </a>
@@ -40,8 +40,8 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">User</span>
         </li>
-        <li class="menu-item {{ request()->is('admin/user*') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ request()->is('user/member*') ? 'active' : '' }}">
+            <a href="{{route('member.index')}}" class="menu-link">
                 <i class='menu-icon bx bxs-user-circle'></i>
                 <div>Member</div>
             </a>
