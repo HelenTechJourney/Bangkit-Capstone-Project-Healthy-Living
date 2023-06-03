@@ -66,17 +66,26 @@ class AuthController extends Controller
         ]);
     }
 
+    public function me()
+    {
+        $user = Auth::user();
+        return response()->json([
+            "message" => "data pengguna yang sedang login",
+            "data" => $user
+        ]);
+    }
+
     public function daftar(Request $request)
     {
-        User::create([
+      $user = User::create([
             'nama' => $request->nama,
-            'username' => $request->username,
+            'email' => $request->email,
             'password' => $request->password,
-            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
         return response()->json([
             "message" => "kamu berhasil membuat data user",
+            "data" => $user
         ]);
     }
     ##end api##

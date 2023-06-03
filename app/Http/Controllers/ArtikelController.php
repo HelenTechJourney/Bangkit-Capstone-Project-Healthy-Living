@@ -30,7 +30,8 @@ class ArtikelController extends Controller
 
         $foto = $request->file('gambar');
         $destinationPath = 'images/';
-        $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+        $baseURL = url('/');
+        $profileImage = $baseURL. "/images/".Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
         $foto->move($destinationPath, $profileImage);
 
         artikel::create([
@@ -65,10 +66,11 @@ class ArtikelController extends Controller
         if ($request->gambar) {
             $foto = $request->file('gambar');
             $destinationPath = 'images/';
-            $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $baseURL = url('/');
+            $profileImage = $baseURL. "/images/" . Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
             $foto->move($destinationPath, $profileImage);
             if ($artikel->gambar) {
-                $file_path = public_path() . "/images/" . $artikel->gambar;
+                $file_path = Str::replace($baseURL . '/images/', '', public_path() . '/images/' . $artikel->gambar);
                 unlink($file_path);
             }
             $artikel->update([
@@ -98,7 +100,8 @@ class ArtikelController extends Controller
     {
         $artikel = artikel::where('id', $id)->first();
         if ($artikel->gambar) {
-            $file_path = public_path() . "/images/" . $artikel->gambar;
+            $baseURL = url('/');
+            $file_path = Str::replace($baseURL . '/images/', '', public_path() . '/images/' . $artikel->gambar);
             unlink($file_path);
         }
         $artikel->delete();

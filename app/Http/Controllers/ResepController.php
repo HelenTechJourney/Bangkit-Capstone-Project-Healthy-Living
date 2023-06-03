@@ -37,7 +37,8 @@ class ResepController extends Controller
 
         $foto = $request->file('gambar');
         $destinationPath = 'images/';
-        $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+        $baseURL = url('/');
+        $profileImage = $baseURL."/images/".Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
         $foto->move($destinationPath, $profileImage);
 
         Resep::create([
@@ -80,11 +81,12 @@ class ResepController extends Controller
         if ($request->gambar) {
             $foto = $request->file('gambar');
             $destinationPath = 'images/';
-            $profileImage = Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $baseURL = url('/');
+            $profileImage = $baseURL."/images/".Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
             $foto->move($destinationPath, $profileImage);
 
             if ($resep->gambar) {
-                $file_path = public_path() . "/images/" . $resep->gambar;
+                $file_path = Str::replace($baseURL . '/images/', '', public_path() . '/images/' . $resep->gambar);
                 unlink($file_path);
             }
 
@@ -114,8 +116,9 @@ class ResepController extends Controller
     {
         $resep = Resep::where('id', $id)->first();
         if ($resep->gambar) {
-            $file_path = public_path() . "/images/" . $resep->gambar;
-            unlink($file_path);
+            $baseURL = url('/');
+            $file_path = Str::replace($baseURL . '/images/', '', public_path() . '/images/' . $resep->gambar);
+                unlink($file_path);
         }
         $resep->delete();
 

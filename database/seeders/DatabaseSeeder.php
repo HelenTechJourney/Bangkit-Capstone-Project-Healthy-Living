@@ -21,5 +21,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'),
             'roles' => 'admin'
         ]);
+
+        \App\Models\User::create([
+            'nama' => 'Muiz Muharram',
+            'email' => 'muis.mm021@gmail.com',
+            'password' => Hash::make('123'),
+            'roles' => 'member'
+        ]);
     }
 }

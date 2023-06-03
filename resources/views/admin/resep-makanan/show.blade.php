@@ -11,7 +11,10 @@
                 <div class="card-body mt-3">
                     <div class="mb-3">
                         <h5 class="text-uppercase">Gambar</h5>
-                        <img src="{{asset('images/'.$resep->gambar)}}" width="30%" alt="">
+                        @php
+                        $baseURL = url('/');
+                    @endphp
+                    <img src="{{asset(Str::replace($baseURL.'/images/','','images/'.$resep->gambar))}}" width="30%" alt="">
                     </div>
                     <div class="mb-3">
                         <h5 class="text-uppercase">Judul</h5>

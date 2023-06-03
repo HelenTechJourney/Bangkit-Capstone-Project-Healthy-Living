@@ -20,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('login',[AuthController::class,'login_app']);
-Route::post('daftar',[AuthController::class,'daftar']);
+Route::post('/daftar',[AuthController::class,'daftar']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('me',[AuthController::class,'me']);
+
     Route::get('logout',[AuthController::class,'logout_app']);
     // artikel
     Route::get('artikel',[ArtikelController::class,'artikel']);
