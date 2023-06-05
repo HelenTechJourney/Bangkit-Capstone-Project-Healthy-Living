@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,48 +76,45 @@ class AuthController extends Controller
         ]);
     }
 
-    public function daftar(Request $request)
+    public function daftar(UserRequest $request)
     {
-      $user = User::create([
+        // dd($request->all());
+
+        User::create([
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => $request->password,
         ]);
 
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        $userLogin = User::where('email', $request->email)->first();
+        if (!$userLogin || !Hash::check($request->password, $userLogin->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Kredensial yang diberikan salah'],
+            ]);
+        }
 
-       $userLogin = User::where('email',$request->email)->first();
-       if(!$userLogin || !Hash::check($request->password,$userLogin->password)){
-        throw ValidationException::withMessages([
-            'email' => ['Kredensial yang diberikan salah'],
-        ]);
-       }
-
-       $userLogin->createToken($userLogin->nama)->plainTextToken;
+        $userLogin->createToken($userLogin->nama)->plainTextToken;
 
         return response()->json([
+            'error' => 'false',
             "message" => "kamu berhasil membuat data user",
-            "data" => $user,
             "token" => $userLogin->createToken($userLogin->nama)->plainTextToken
-        ]);
+        ], 200);
     }
 
     public function user_data_form1(Request $request)
     {
         $userLogin = Auth::user();
-        $user = User::where('id',$userLogin->id)->first();
+        $user = User::where('id', $userLogin->id)->first();
 
         // tinggi badan dalam meter
-        $tinggi_badan = $request->tinggi_badan/100;
+        $tinggi_badan = $request->tinggi_badan / 100;
 
-        $bmi = $user->berat_badan/($tinggi_badan*$tinggi_badan);
-        $bmr_pria = 66+(13.7*$user->berat_badan)+(5*$user->tinggi_badan)-(6.8*$user->usia);
-        $bmr_wanita = 655+(9.6*$user->berat_badan)+(1.8*$user->tinggi_badan)-(4.7*$user->usia);
+        $bmi = $user->berat_badan / ($tinggi_badan * $tinggi_badan);
+        $bmr_pria = 66 + (13.7 * $user->berat_badan) + (5 * $user->tinggi_badan) - (6.8 * $user->usia);
+        $bmr_wanita = 655 + (9.6 * $user->berat_badan) + (1.8 * $user->tinggi_badan) - (4.7 * $user->usia);
 
-        if($request->jenis_kelamin == 'Laki - laki'){
+        if ($request->jenis_kelamin == 'Laki - laki') {
             $user->update([
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'usia' => $request->usia,
@@ -126,8 +124,8 @@ class AuthController extends Controller
                 'bmi' => $bmi,
                 'bmr' => $bmr_pria
             ]);
-        }else
-        if($request->jenis_kelamin == 'Perempuan'){
+        } else
+        if ($request->jenis_kelamin == 'Perempuan') {
             $user->update([
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'usia' => $request->usia,
@@ -153,19 +151,19 @@ class AuthController extends Controller
     public function user_data_form2()
     {
         $userLogin = Auth::user();
-        $user = User::where('id',$userLogin->id)->first();
+        $user = User::where('id', $userLogin->id)->first();
         if ($user->jenis_kelamin == 'Laki - laki') {
-            $rekomendasiBeratBadan = ($user->tinggi_badan - 100) - (($user->tinggi_badan - 100) * 10/100);
-        }else
-        if($user->jenis_kelamin == 'Perempuan'){
-            $rekomendasiBeratBadan = ($user->tinggi_badan - 100) - (($user->tinggi_badan - 100) * 10/100);
+            $rekomendasiBeratBadan = ($user->tinggi_badan - 100) - (($user->tinggi_badan - 100) * 10 / 100);
+        } else
+        if ($user->jenis_kelamin == 'Perempuan') {
+            $rekomendasiBeratBadan = ($user->tinggi_badan - 100) - (($user->tinggi_badan - 100) * 10 / 100);
         }
 
         return response()->json([
             'message' => 'kamu berhasil mengambil form 2 data user',
             'data' => [
-                "bmr" => number_format($user->bmr,3),
-                "bmi" => number_format($user->bmi,3),
+                "bmr" => number_format($user->bmr, 3),
+                "bmi" => number_format($user->bmi, 3),
                 "rekomendasi_berat_badan" => $rekomendasiBeratBadan
             ]
         ]);
