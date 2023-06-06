@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,17 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required',
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required'
         ];
     }
 
     public function messages()
     {
-        return[
-            'nama.required' => 'nama tidak boleh kosong',
+        return [
             'email.required' => 'email tidak boleh kosong',
-            'email.email' => 'harus menggunakan email',
-            'password' => 'password tidak boleh kosong'
+            'email.email' => 'inputan harus email',
+            'password.required' => 'password tidak boleh kosong'
         ];
     }
 
@@ -49,4 +47,3 @@ class UserRequest extends FormRequest
         ], 400));
     }
 }
-

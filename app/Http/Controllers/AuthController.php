@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,13 +41,8 @@ class AuthController extends Controller
     ##end web##
 
     ##api##
-    public function login_app(Request $request)
+    public function login_app(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -54,8 +50,12 @@ class AuthController extends Controller
                 'email' => ['Kredensial yang diberikan salah'],
             ]);
         }
-
-        return $user->createToken($user->nama)->plainTextToken;
+        $token = $user->createToken($user->nama)->plainTextToken;
+        return response()->json([
+            "error" => 'false',
+            'message' => 'kamu berhasil login',
+            'token' => $token
+        ]);
     }
 
     public function logout_app(Request $request)
@@ -78,8 +78,6 @@ class AuthController extends Controller
 
     public function daftar(UserRequest $request)
     {
-        // dd($request->all());
-
         User::create([
             'nama' => $request->nama,
             'email' => $request->email,
