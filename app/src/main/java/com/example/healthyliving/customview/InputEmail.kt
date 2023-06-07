@@ -1,4 +1,4 @@
-package com.example.healthylivingapp.ui.customview
+package com.example.healthyliving.customview
 
 import android.content.Context
 import android.graphics.Rect
@@ -9,11 +9,11 @@ import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
-import com.example.healthylivingapp.R
+import com.example.healthyliving.R
 
 class InputEmail: AppCompatEditText, View.OnTouchListener  {
 
-    private var isEmailValid: Boolean = false
+    var isEmailValid: Boolean = false
 
     constructor(context: Context) : super(context) {
         init()

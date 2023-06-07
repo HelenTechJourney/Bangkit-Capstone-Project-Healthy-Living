@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/form1Fragment"
-        android:name="com.example.healthylivingapp.ui.fragment.Form1Fragment"
+        android:name="com.example.healthyliving.ui.fragment.Form1Fragment"
         android:label="fragment_form1">
         <action
             android:id="@+id/action_form1_to_form2"
@@ -20,10 +20,10 @@
     </fragment>
     <fragment
         android:id="@+id/form2Fragment"
-        android:name="com.example.healthylivingapp.ui.fragment.Form2Fragment"
+        android:name="com.example.healthyliving.ui.fragment.Form2Fragment"
         android:label="fragment_register">
         <action
-            android:id="@+id/action_form2Fragment_to_form1Fragment"
+            android:id="@+id/action_form2_to_form1"
             app:destination="@id/form1Fragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

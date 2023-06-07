@@ -38,7 +38,7 @@
 
     <string name="next">Lanjutkan</string>
     <string name="question">Isi User Data</string>
-    <string name="question_desc">Data yang diisi digunakan untuk menentukan BMI dan BMR</string>
+    <string name="question_desc">Data yang diisi digunakan untuk menentukan</string>
     <string name="gender">Jenis Kelamin</string>
     <string name="years">Umur(tahun)</string>
     <string name="cm">Tinggi Badan(cm)</string>
@@ -54,5 +54,20 @@
     <string name="resultWeight">Recomend Result</string>
     <string name="finish">Selesai</string>
     <string name="title_jelajahi">Jelajahi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="descBmi">Body Mass Index (BMI) atau Indeks Massa Tubuh (IMT) adalah salah satu cara untuk mencapai kesetimbangan energi. Kesetimbangan energi dapat dicapai jika makanan yang dikonsumsi dapat menghasilkan energi dalam jumlah yang sama dengan energi yang dikeluarkan.</string>
+    <string name="descBmr">Basal Metabolic Rate (BMR) atau Angka Metabolisme Basal (AMB) adalah kebutuhan minimal energi untuk melakukan proses tubuh vital. Proses tubuh vital meliputi mempertahankan tonus otot, sistem peredaran darah, pernapasan, metabolisme sel, dan mempertahankan suhu tubuh.</string>
+    <string name="bmiBmr">BMI dan BMR</string>
+    <string name="gotIt">Oke, paham</string>
+    <string name="whatIs">Apa itu BMI dan BMR?</string>
+    <string name="edit">Edit Profile</string>
+    <string name="kalkulator">Kalkulator</string>
+    <string name="chatbot">Chatbot</string>
+    <string name="logout">Logout</string>
+    <string name="you_sure">Apakah kamu yakin ingin keluar?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="dataTitle">Judul data</string>
+    <string name="username">Nama User</string>
 
 </resources>
