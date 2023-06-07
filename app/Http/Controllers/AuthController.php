@@ -54,7 +54,10 @@ class AuthController extends Controller
         return response()->json([
             "error" => 'false',
             'message' => 'kamu berhasil login',
-            'token' => $token
+            "resultLogin" => [
+                'nama' => $user->nama,
+                'token' => $token
+            ]
         ]);
     }
 
@@ -94,9 +97,12 @@ class AuthController extends Controller
         $userLogin->createToken($userLogin->nama)->plainTextToken;
 
         return response()->json([
-            'error' => 'false',
+            "error" => "false",
             "message" => "kamu berhasil membuat data user",
-            "token" => $userLogin->createToken($userLogin->nama)->plainTextToken
+            'resultDaftar' => [
+                'nama' => $userLogin->nama,
+                " token" => $userLogin->createToken($userLogin->nama)->plainTextToken
+            ]
         ], 200);
     }
 
