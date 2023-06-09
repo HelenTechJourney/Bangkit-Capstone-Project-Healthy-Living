@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.healthyliving.remote.response.RequestSignup
 import com.example.healthyliving.remote.retrofit.ApiConfig
-import com.example.healthyliving.remote.retrofit.ResponseMessage
+import com.example.healthyliving.remote.response.ResponseMessage
 import retrofit2.Call
 import retrofit2.Response
 

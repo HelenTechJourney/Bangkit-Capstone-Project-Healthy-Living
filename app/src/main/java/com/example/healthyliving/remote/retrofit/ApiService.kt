@@ -1,14 +1,10 @@
 package com.example.healthyliving.remote.retrofit
 
-import com.example.healthyliving.remote.response.LoginResponse
-import com.example.healthyliving.remote.response.RequestLogin
-import com.example.healthyliving.remote.response.RequestSignup
-import com.example.storyapp.remote.response.*
+import com.example.healthyliving.remote.response.*
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-    @Headers("Content-Type: application/json")
     @POST("daftar")
     fun createAccount(
         @Body requestSignUp: RequestSignup
@@ -36,14 +32,14 @@ interface ApiService {
 //        @Query("size") size: Int
 //    ): ListStoryResponse
 
-//    @GET("stories")
-//   fun getArticle(
-//        @Header("Authorization") token: String
-//    ): Call<ListStoryResponse>
-//
-//    @GET("stories/{id}")
-//    fun getDetailArticle(
-//        @Header("Authorization") token : String,
-//        @Path("id") id: String
-//    ): Call<DetailResponse>
+    @GET("artikel")
+   fun getArticle(
+        @Header("Authorization") token: String
+    ): Call<ArticleResponse>
+
+    @GET("resep")
+    fun getRecipe(
+        @Header("Authorization") token: String
+    ): Call<RecipeResponse>
+
 }

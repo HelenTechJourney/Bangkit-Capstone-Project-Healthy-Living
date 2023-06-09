@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
 
                 R.id.navigation_jelajahi -> replaceFragment(JelajahiFragment(dataStore))
-                R.id.navigation_resep -> replaceFragment(ResepFragment())
+                R.id.navigation_resep -> replaceFragment(ResepFragment(dataStore))
                 R.id.navigation_profile -> replaceFragment(ProfileFragment(dataStore))
 
                 else ->{}

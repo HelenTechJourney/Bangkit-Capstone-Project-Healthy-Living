@@ -1,4 +1,4 @@
-package com.example.healthyliving.remote.retrofit
+package com.example.healthyliving.remote.response
 
 import com.google.gson.annotations.SerializedName
 

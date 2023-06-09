@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.healthyliving.R
-import com.example.storyapp.remote.response.ListStoryItem
+import com.example.healthyliving.remote.response.ArtikelItem
 
-class ArticleAdapter(private val listStory: List<ListStoryItem>) :
+class ArticleAdapter(private val listArticle: List<ArtikelItem>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         var imageView: ImageView = view.findViewById(R.id.img_item_avatar)
@@ -26,19 +26,18 @@ class ArticleAdapter(private val listStory: List<ListStoryItem>) :
         ViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.item_user, viewGroup, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = listStory[position]
-        holder.tvName.text = data.name
+        val data = listArticle[position]
+        holder.tvName.text = data.judul
         Glide.with(holder.itemView)
-            .load(data.photoUrl)
+            .load(data.gambar)
             .into(holder.imageView)
         holder.itemView.setOnClickListener {
-            onItemClickCallback?.onItemClicked(listStory[holder.adapterPosition])
+            onItemClickCallback?.onItemClicked(listArticle[holder.adapterPosition])
         }
     }
-
-    override fun getItemCount() = listStory.size
+    override fun getItemCount() = listArticle.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: ListStoryItem)
+        fun onItemClicked(data: ArtikelItem)
     }
 }

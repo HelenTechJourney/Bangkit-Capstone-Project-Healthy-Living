@@ -49,9 +49,9 @@ class Login : AppCompatActivity() {
         supportActionBar?.title = "Login"
 
         val pref = UserPreference.getInstance(dataStore)
-        val dataStoreViewModel = ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+        val viewModel = ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
 
-        dataStoreViewModel.getLoginState().observe(this) { state ->
+        viewModel.getLoginState().observe(this) { state ->
             if (state) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -61,7 +61,7 @@ class Login : AppCompatActivity() {
 
         loginViewModel.message.observe(this) {
             val user = loginViewModel.userLogin.value
-            checkResponseLogin(it, user?.resultLogin?.token, dataStoreViewModel)
+            checkResponseLogin(it, user?.resultLogin?.token, viewModel)
         }
 
         loginViewModel.isLoading.observe(this) {
@@ -131,6 +131,7 @@ class Login : AppCompatActivity() {
             ).show()
             viewModel.saveLoginState(true)
             if (token != null) viewModel.saveToken(token)
+            viewModel.saveName(loginViewModel.userLogin.value?.resultLogin?.nama.toString())
         } else {
             when (message) {
                 "Unauthorized" -> {

@@ -32,7 +32,7 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
                 if (response.isSuccessful) {
                     isError = false
                     _userLogin.value = responseBody!!
-                    _message.value = "Login as ${_userLogin.value!!.resultLogin?.nama}"
+                    _message.value = "sebagai ${_userLogin.value!!.resultLogin?.nama}"
                 } else {
                     isError = true
                     _message.value = response.message()

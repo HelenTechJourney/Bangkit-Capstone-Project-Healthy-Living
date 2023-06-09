@@ -69,5 +69,9 @@
     <string name="no">Tidak</string>
     <string name="dataTitle">Judul data</string>
     <string name="username">Nama User</string>
+    <string name="hasil">Hasil BMI dan BMR</string>
+    <string name="description_detail">Isi deskripsi data</string>
+    <string name="referensi">Referensi</string>
+    <string name="reference_detail">Isi referensi</string>
 
 </resources>

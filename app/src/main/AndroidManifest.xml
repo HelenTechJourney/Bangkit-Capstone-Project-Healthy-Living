@@ -16,11 +16,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 <!--        <activity-->
-<!--            android:name=".DetailRecipeActivity"-->
+<!--            android:name=".KalkulatorActivity"-->
 <!--            android:exported="false" />-->
 <!--        <activity-->
-<!--            android:name=".DetailArticleActivity"-->
-<!--            android:exported="false" />-->
+<!--            android:name=".KalkulatorActivity2"-->
+<!--            android:exported="false" /> &lt;!&ndash; <activity &ndash;&gt;-->
+        <activity
+            android:name=".ui.activity.DetailRecipeActivity"
+            android:exported="false" />
+        <activity
+         android:name=".ui.activity.DetailArticleActivity"
+         android:exported="false" />
         <activity
             android:name=".ui.activity.SignUp"
             android:exported="false" />

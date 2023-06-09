@@ -32,6 +32,7 @@ class ProfileFragment(private val dataStore: DataStore<Preferences>) : Fragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        requireActivity().title = "Profile"
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val pref = UserPreference.getInstance(dataStore)
         val loginViewModel =
