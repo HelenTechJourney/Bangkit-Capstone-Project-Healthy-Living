@@ -51,12 +51,11 @@ def model(day,kg,calories):
     sol = pd.DataFrame({'Food': food, 'Quantity': values})
     sol = sol[sol['Quantity'] != 0.0]
     sol['Quantity (g)'] = (sol['Quantity'] * 100).round(2)
-    sol.rename(columns={'Quantity': 'Quantity (g)'}, inplace=True)
+    sol.rename(columns={'Quantity': 'Quantity (g)'})
     sol['Cluster'] = day_data.loc[sol.index, 'cluster'].tolist()
     
     output_dict = sol.to_dict(orient='list')
     print(json.dumps(output_dict))
-
     return sol
 
 def main():
