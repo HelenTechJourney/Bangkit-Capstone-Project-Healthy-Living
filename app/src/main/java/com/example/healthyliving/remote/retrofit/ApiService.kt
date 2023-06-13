@@ -14,7 +14,15 @@ interface ApiService {
     fun accessAccount(
         @Body requestLogin: RequestLogin
     ): Call<LoginResponse>
+    @POST("user_data_form1")
+    fun createData(
+        @Body requestForm: RequestForm
+    ): Call<ResponseCalculator>
 
+    @GET("user_data_form2")
+    fun getResult(
+        @Header("Authorization") token: String
+    ): Call<ResultResponse>
 //    @Multipart
 //    @POST("stories")
 //    fun addNewStories(
@@ -31,7 +39,6 @@ interface ApiService {
 //        @Query("page") page: Int,
 //        @Query("size") size: Int
 //    ): ListStoryResponse
-
     @GET("artikel")
    fun getArticle(
         @Header("Authorization") token: String

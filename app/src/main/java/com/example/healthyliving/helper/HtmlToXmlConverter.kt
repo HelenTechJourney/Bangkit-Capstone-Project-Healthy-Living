@@ -7,48 +7,38 @@ import org.jsoup.nodes.Element
 class HtmlToXmlConverter {
     fun convert(html: String): String {
         val doc: Document = Jsoup.parse(html)
-        convertElements(doc.body().children())
-        return doc.outerHtml()
+        removeHtmlTags(doc.body())
+        return doc.body().text()
     }
 
-    private fun convertElements(elements: List<Element>?) {
-        elements?.forEach { element ->
-            when (element.tagName()) {
-                "b" -> element.tagName("strong")
-                "i" -> element.tagName("em")
-                "font" -> convertFontTag(element)
-            }
-            convertElements(element.children())
+    private fun removeHtmlTags(element: Element) {
+        val childTags: List<Element> = element.children()
+        for (childTag in childTags) {
+            removeHtmlTags(childTag)
+            childTag.unwrap()
         }
     }
+}
 
-    private fun convertFontTag(element: Element) {
-        val style = StringBuilder()
-        val sizeAttr = element.attr("size")
-        val colorAttr = element.attr("color")
-        val faceAttr = element.attr("face")
+fun main() {
+    // HTML dengan tag dan atribut
+    val htmlString = "<div>" +
+            "<p description=\"Description text\">Hello <strong>world</strong></p>" +
+            "<p detail=\"Detail text\">This is <em>bold</em> and <a href=\"https://example.com\">link</a> text.</p>" +
+            "</div>"
 
-        if (sizeAttr.isNotEmpty()) {
-            style.append("font-size: ${sizeAttr}pt;")
-        }
+    // Membuat instance HtmlToXmlConverter
+    val converter = HtmlToXmlConverter()
 
-        if (colorAttr.isNotEmpty()) {
-            style.append("color: $colorAttr;")
-        }
+    // Mengubah HTML menjadi format yang mudah terbaca
+    val textOutput = converter.convert(htmlString)
 
-        if (faceAttr.isNotEmpty()) {
-            style.append("font-family: $faceAttr;")
-        }
+    // Menghilangkan karakter escape XML yang ada pada output
+    val xmlOutput = textOutput.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
-        element.tagName("span")
-        element.removeAttr("size")
-        element.removeAttr("color")
-        element.removeAttr("face")
+    // Membuat XML output dengan elemen tvDescriptionDetail
+    val xmlString = "<tvDescriptionDetail>$xmlOutput</tvDescriptionDetail>"
 
-        if (style.isNotEmpty()) {
-            element.attr("style", style.toString())
-        }
-
-        convertElements(element.children())
-    }
+    // Output hasil
+    println(xmlString)
 }

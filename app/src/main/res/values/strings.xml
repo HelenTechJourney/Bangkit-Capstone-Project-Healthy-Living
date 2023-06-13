@@ -20,8 +20,8 @@
     <string name="comeSignup">Daftar</string>
     <string name="comeLogin">Masuk</string>
 
-    <string name="input_password">Masukkan kata sandi Anda di sini</string>
-    <string name="input_email">Masukkan Email Anda di sini</string>
+    <string name="input_password">Password</string>
+    <string name="input_email">Email</string>
     <string name="required_email">Email harus diisi</string>
     <string name="invalid_email">Email tidak valid</string>
     <string name="required_pass">Kata sandi harus diisi</string>
@@ -32,8 +32,8 @@
     <string name="login_success">Berhasil masuk</string>
     <string name="user_created">Akun berhasil dibuat</string>
     <string name="required_name">Nama harus diisi</string>
-    <string name="input_name">Masukkan nama Anda di sini</string>
-    <string name="input_cpass">Konfirmasi kata sandi Anda di sini</string>
+    <string name="input_name">Nama</string>
+    <string name="input_cpass">Konfirmasi Password</string>
     <string name="pass_not_match">Kata sandi tidak cocok</string>
 
     <string name="next">Lanjutkan</string>
@@ -67,11 +67,24 @@
     <string name="you_sure">Apakah kamu yakin ingin keluar?</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
-    <string name="dataTitle">Judul data</string>
+    <string name="dataTitle">Judul data yang sangat yang panjang</string>
     <string name="username">Nama User</string>
     <string name="hasil">Hasil BMI dan BMR</string>
     <string name="description_detail">Isi deskripsi data</string>
     <string name="referensi">Referensi</string>
     <string name="reference_detail">Isi referensi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rb1">Menurunkan Berat Badan</string>
+    <string name="rb2">Menaikkan Berat Badan</string>
+    <string name="purpose">Apakah tujuan diet anda</string>
+    <string name="rb3">Menjadi Lebih Sehat</string>
+    <string name="rb4">Mendapatkan Energi</string>
+    <string name="recomendTitle">Rekomendasi Program Diet Untuk Anda</string>
+    <string name="recomend_desc">Isi rekomendasi program diet</string>
+    <string name="recomendResep">Rekomendasi Resep</string>
+    <string name="input_age">Usia harus diisi</string>
+    <string name="input_weight">Berat Badan harus diisi</string>
+    <string name="input_height">Tinggi Badan harus diisi</string>
 
 </resources>

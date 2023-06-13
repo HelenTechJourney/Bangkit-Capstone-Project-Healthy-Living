@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/form1Fragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_donor_data"
+    app:startDestination="@id/form2Fragment">
 
     <fragment
-        android:id="@+id/form1Fragment"
-        android:name="com.example.healthyliving.ui.fragment.Form1Fragment"
-        android:label="fragment_form1">
+        android:id="@+id/form2Fragment"
+        android:name="com.example.healthyliving.ui.form.Form2Fragment"
+        android:label="fragment_form2"
+        tools:layout="@layout/fragment_form2" >
         <action
-            android:id="@+id/action_form1_to_form2"
-            app:destination="@id/form2Fragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:launchSingleTop="false"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_form2Fragment_to_form3Fragment"
+            app:destination="@id/form3Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/form2Fragment"
-        android:name="com.example.healthyliving.ui.fragment.Form2Fragment"
-        android:label="fragment_register">
-        <action
-            android:id="@+id/action_form2_to_form1"
-            app:destination="@id/form1Fragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpToInclusive="true" />
+        android:id="@+id/form3Fragment"
+        android:name="com.example.healthyliving.ui.form.Form3Fragment"
+        android:label="fragment_form3"
+        tools:layout="@layout/fragment_form3" >
     </fragment>
 </navigation>

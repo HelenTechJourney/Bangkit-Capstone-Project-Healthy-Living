@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.activity.DetailArticleActivity">
+        tools:context=".ui.detail.DetailArticleActivity">
     <ImageView
         android:id="@+id/iv_detail_photo"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:layout_marginEnd="32dp"
         android:gravity="center"
         android:text="@string/dataTitle"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
         android:layout_marginEnd="24dp"
         android:text="@string/description_detail"
         android:textAlignment="gravity"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_marginEnd="24dp"
         android:text="@string/reference_detail"
         android:textAlignment="gravity"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/referensi" />
 
     <ProgressBar

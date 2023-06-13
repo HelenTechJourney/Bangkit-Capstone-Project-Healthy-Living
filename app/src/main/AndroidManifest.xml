@@ -15,32 +15,32 @@
         android:theme="@style/Theme.HealthyLivingApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".KalkulatorActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".KalkulatorActivity2"-->
-<!--            android:exported="false" /> &lt;!&ndash; <activity &ndash;&gt;-->
+   <!-- <activity -->
+        <!-- android:name=".KalkulatorActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".KalkulatorActivity2" -->
+        <!-- android:exported="false" /> &lt;!&ndash; <activity &ndash;&gt; -->
         <activity
-            android:name=".ui.activity.DetailRecipeActivity"
+            android:name=".ui.detail.DetailRecipeActivity"
             android:exported="false" />
         <activity
-         android:name=".ui.activity.DetailArticleActivity"
-         android:exported="false" />
-        <activity
-            android:name=".ui.activity.SignUp"
+            android:name=".ui.detail.DetailArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.Login"
+            android:name=".ui.authentication.SignUp"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.FormActivity"
+            android:name=".ui.authentication.Login"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.form.FormActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authentication.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
