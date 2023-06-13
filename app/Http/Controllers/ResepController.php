@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DOMDocument;
 use Carbon\Carbon;
+use App\Models\Bahan;
+use App\Models\CaraMembuat;
 use App\Models\Resep;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -38,7 +41,7 @@ class ResepController extends Controller
         $foto = $request->file('gambar');
         $destinationPath = 'images/';
         $baseURL = url('/');
-        $profileImage = $baseURL."/images/".Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+        $profileImage = $baseURL . "/images/" . Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
         $foto->move($destinationPath, $profileImage);
 
         Resep::create([
@@ -58,7 +61,9 @@ class ResepController extends Controller
     public function show($id)
     {
         $resep = Resep::where('id', $id)->first();
-        return view('admin.resep-makanan.show', ['resep' => $resep]);
+        $bahan = Bahan::where('resep_id',$resep->id)->get();
+        $cara_membuat = CaraMembuat::where('resep_id',$resep->id)->get();
+        return view('admin.resep-makanan.show', ['resep' => $resep, 'bahan' => $bahan, 'cara_membuat' => $cara_membuat]);
     }
 
     /**
@@ -82,7 +87,7 @@ class ResepController extends Controller
             $foto = $request->file('gambar');
             $destinationPath = 'images/';
             $baseURL = url('/');
-            $profileImage = $baseURL."/images/".Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $profileImage = $baseURL . "/images/" . Str::slug($request->judul) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
             $foto->move($destinationPath, $profileImage);
 
             if ($resep->gambar) {
@@ -118,7 +123,7 @@ class ResepController extends Controller
         if ($resep->gambar) {
             $baseURL = url('/');
             $file_path = Str::replace($baseURL . '/images/', '', public_path() . '/images/' . $resep->gambar);
-                unlink($file_path);
+            unlink($file_path);
         }
         $resep->delete();
 
@@ -135,12 +140,34 @@ class ResepController extends Controller
         ]);
     }
 
-    public function detail_resep($id)
-    {
-        $resep = Resep::where('id',$id)->first();
-        return response()->json([
-            "message" => "kamu berhasil melihat detail data resep",
-            'data' => $resep
-        ]);
-    }
+    // public function detail_resep($id)
+    // {
+    //     $resep = Resep::where('id', $id)->first();
+    //     $html = $resep->deskripsi;
+    //     // Buat instance dari DOMDocument
+    //     $dom = new DOMDocument();
+
+    //     // Supaya pemrosesan HTML bisa dilakukan tanpa error
+    //     libxml_use_internal_errors(true);
+
+    //     // Muat konten HTML ke DOMDocument
+    //     $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+    //     // Setelah DOMDocument terisi dengan HTML, reset error handling
+    //     libxml_clear_errors();
+    //     libxml_use_internal_errors(false);
+
+    //     // Konversi DOM menjadi string XML
+    //     $xml = $dom->saveXML();
+
+
+    //     return response()->json([
+    //         "message" => "kamu berhasil melihat seluruh data resep",
+    //         'data' => $xml
+    //     ]);
+    //     // return response()->json([
+    //     //     "message" => "kamu berhasil melihat detail data resep",
+    //     //     'data' => $resep
+    //     // ]);
+    // }
 }

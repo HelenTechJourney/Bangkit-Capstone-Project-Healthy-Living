@@ -66,13 +66,3 @@
     </div>
 </div>
 @endsection
-
-@section('scripts')
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#deskripsi'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-@endsection

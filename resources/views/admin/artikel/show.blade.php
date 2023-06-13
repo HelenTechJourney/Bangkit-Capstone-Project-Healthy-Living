@@ -9,28 +9,31 @@
             <div class="card mb-4">
                 <h5 class="card-header">Artikel</h5>
                 <div class="card-body mt-3">
-                    <div class="mb-3">
-                        <h5 class="text-uppercase">Gambar</h5>
-                        @php
-                            $baseURL = url('/');
-                        @endphp
-                        <img src="{{asset(Str::replace($baseURL.'/images/','','images/'.$artikel->gambar))}}" width="30%" alt="">
-                    </div>
-                    <div class="mb-3">
-                        <h5 class="text-uppercase">Judul</h5>
-                        <p>{{$artikel->judul}}</p>
-                    </div>
-                    <div class="mb-3">
-                        <h5 class="text-uppercase">Author</h5>
-                        <p>{{$artikel->author}}</p>
-                    </div>
-                    <div class="mb-3">
-                        <h5 class="text-uppercase">Deskripsi</h5>
-                        <p>{!!$artikel->deskripsi!!}</p>
-                    </div>
-                    <div class="mb-3">
-                        <h5 class="text-uppercase">Referensi</h5>
-                        <p>{{$artikel->referensi}}</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="defaultFormControlInput" class="form-label">Gambar</label>
+                                <a href="{{ $artikel->gambar }}" class="btn btn-primary w-100" target="_BLANK">Gambar</a>
+                            </div>
+                            <div class="mb-3">
+                                <label for="defaultFormControlInput" class="form-label">Judul</label>
+                                <input class="form-control bg-light" value="{{ $artikel->judul }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="defaultFormControlInput" class="form-label">Author</label>
+                                <input class="form-control bg-light" value="{{ $artikel->author }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="defaultFormControlInput" class="form-label">Referensi</label>
+                                <input class="form-control bg-light" value="{{ $artikel->referensi }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="defaultFormControlInput" class="form-label">Deskripsi</label>
+                                <textarea class="form-control bg-light" cols="30" rows="10" readonly>{{ $artikel->deskripsi }}</textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-end">
                         <a href="{{route('artikel.index')}}" class="btn btn-danger">Kembali</a>
