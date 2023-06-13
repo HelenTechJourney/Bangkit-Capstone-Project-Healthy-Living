@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserRequest;
+use Carbon\Carbon;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use GuzzleHttp\RequestOptions;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -112,11 +117,9 @@ class AuthController extends Controller
         $user = User::where('id', $userLogin->id)->first();
 
         // tinggi badan dalam meter
-        $tinggi_badan = $request->tinggi_badan / 100;
-
-        $bmi = $user->berat_badan / ($tinggi_badan * $tinggi_badan);
         $bmr_pria = 66 + (13.7 * $user->berat_badan) + (5 * $user->tinggi_badan) - (6.8 * $user->usia);
         $bmr_wanita = 655 + (9.6 * $user->berat_badan) + (1.8 * $user->tinggi_badan) - (4.7 * $user->usia);
+        $bmi = $user->berat_badan / (($request->tinggi_badan / 100) * ($request->tinggi_badan / 100));
 
         if ($request->jenis_kelamin == 'Laki - laki') {
             $user->update([
@@ -163,14 +166,50 @@ class AuthController extends Controller
             $rekomendasiBeratBadan = ($user->tinggi_badan - 100) - (($user->tinggi_badan - 100) * 10 / 100);
         }
 
+        $client = new Client();
+        // dd($user);
+        $hariIni = Carbon::now()->format('l');
+        $body = [
+            'day' => $hariIni,
+            'kg' => $user->berat_badan,
+            'calories' => $user->bmr,
+        ];
+
+        $response = Http::post('https://bangkit-capstone-project-healthy-living-7ya5ntaxeq-as.a.run.app/solve', $body);
+dd($response);
+        // Mengambil respons sebagai array jika merespons dengan format JSON
+        $responseData = $response->json();
+
+        // Menyimpan respons ke dalam variabel
+        dd($responseData);
+
+        // $response = $client->request(
+        //     'post',
+        //     'https://bangkit-capstone-project-healthy-living-7ya5ntaxeq-as.a.run.app/solve',
+        //     [
+        //         RequestOptions::JSON => $body,
+        //         RequestOptions::HEADERS => [
+        //             'Content-Type' => 'application/json',
+        //             'Accept' => 'application/ld+json',
+        //         ],
+        //     ]
+        // );
+
+        // $data = json_decode($response->getBody()->getContents(), true);
+
         return response()->json([
             'message' => 'kamu berhasil mengambil form 2 data user',
             'data' => [
                 "bmr" => number_format($user->bmr, 3),
-                "bmi" => number_format($user->bmi, 3),
-                "rekomendasi_berat_badan" => $rekomendasiBeratBadan
+                // "response" => $data
+                // "bmi" => number_format($user->bmi, 3),
+                // "rekomendasi_berat_badan" => $rekomendasiBeratBadan
             ]
         ]);
+    }
+
+    public function user_data_form3()
+    {
     }
     ##end api##
 }

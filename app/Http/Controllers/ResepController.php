@@ -61,8 +61,8 @@ class ResepController extends Controller
     public function show($id)
     {
         $resep = Resep::where('id', $id)->first();
-        $bahan = Bahan::where('resep_id',$resep->id)->get();
-        $cara_membuat = CaraMembuat::where('resep_id',$resep->id)->get();
+        $bahan = Bahan::where('resep_id', $resep->id)->get();
+        $cara_membuat = CaraMembuat::where('resep_id', $resep->id)->get();
         return view('admin.resep-makanan.show', ['resep' => $resep, 'bahan' => $bahan, 'cara_membuat' => $cara_membuat]);
     }
 
@@ -133,41 +133,17 @@ class ResepController extends Controller
 
     public function resep()
     {
-        $resep = Resep::get();
+        $resep = Resep::select('id', 'judul', 'deskripsi', 'author', 'gambar', 'referensi')
+            ->with(['bahans' => function ($query) {
+                $query->select('resep_id', 'deskripsi');
+            }])
+            ->with(['caraMembuats' => function ($query) {
+                $query->select('resep_id', 'deskripsi');
+            }])
+            ->get();
         return response()->json([
             "message" => "kamu berhasil melihat seluruh data resep",
             'data' => $resep
         ]);
     }
-
-    // public function detail_resep($id)
-    // {
-    //     $resep = Resep::where('id', $id)->first();
-    //     $html = $resep->deskripsi;
-    //     // Buat instance dari DOMDocument
-    //     $dom = new DOMDocument();
-
-    //     // Supaya pemrosesan HTML bisa dilakukan tanpa error
-    //     libxml_use_internal_errors(true);
-
-    //     // Muat konten HTML ke DOMDocument
-    //     $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-    //     // Setelah DOMDocument terisi dengan HTML, reset error handling
-    //     libxml_clear_errors();
-    //     libxml_use_internal_errors(false);
-
-    //     // Konversi DOM menjadi string XML
-    //     $xml = $dom->saveXML();
-
-
-    //     return response()->json([
-    //         "message" => "kamu berhasil melihat seluruh data resep",
-    //         'data' => $xml
-    //     ]);
-    //     // return response()->json([
-    //     //     "message" => "kamu berhasil melihat detail data resep",
-    //     //     'data' => $resep
-    //     // ]);
-    // }
 }

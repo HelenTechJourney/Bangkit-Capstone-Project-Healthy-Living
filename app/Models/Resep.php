@@ -11,11 +11,15 @@ class Resep extends Model
 
     protected $guarded = ['id'];
 
-    public function bahan(){
-        $this->belongsTo(Bahan::class);
+    protected $with = ['bahans','caraMembuats'];
+
+    public function bahans()
+    {
+        return $this->hasMany(Bahan::class, 'resep_id');
     }
 
-    public function caraMembuat(){
-        $this->belongsTo(CaraMembuat::class);
+    public function caraMembuats()
+    {
+        return $this->hasMany(CaraMembuat::class, 'resep_id');
     }
 }

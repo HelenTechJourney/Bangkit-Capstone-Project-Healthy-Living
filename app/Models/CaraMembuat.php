@@ -10,7 +10,8 @@ class CaraMembuat extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function resep(){
-        $this->hasMany(Resep::class);
+    public function resep()
+    {
+        return $this->belongsTo(Resep::class, 'resep_id');
     }
 }

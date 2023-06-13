@@ -11,7 +11,8 @@ class Bahan extends Model
 
     protected $guarded = ['id'];
 
-    public function resep(){
-        $this->hasMany(Resep::class);
+    public function resep()
+    {
+        return $this->belongsTo(Resep::class, 'resep_id');
     }
 }
