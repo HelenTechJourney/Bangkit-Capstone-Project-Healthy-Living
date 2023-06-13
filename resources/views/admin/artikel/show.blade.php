@@ -23,15 +23,15 @@
                                 <label for="defaultFormControlInput" class="form-label">Author</label>
                                 <input class="form-control bg-light" value="{{ $artikel->author }}" readonly>
                             </div>
-                        </div>
-                        <div class="col-6">
                             <div class="mb-3">
                                 <label for="defaultFormControlInput" class="form-label">Referensi</label>
                                 <input class="form-control bg-light" value="{{ $artikel->referensi }}" readonly>
                             </div>
+                        </div>
+                        <div class="col-6">
                             <div class="mb-3">
                                 <label for="defaultFormControlInput" class="form-label">Deskripsi</label>
-                                <textarea class="form-control bg-light" cols="30" rows="10" readonly>{{ $artikel->deskripsi }}</textarea>
+                                <textarea class="form-control bg-light" cols="30" rows="12" readonly>{{ $artikel->deskripsi }}</textarea>
                             </div>
                         </div>
                     </div>
