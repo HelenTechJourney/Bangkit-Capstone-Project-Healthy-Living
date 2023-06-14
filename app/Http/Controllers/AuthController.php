@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use GuzzleHttp\Client;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use GuzzleHttp\RequestOptions;
 use App\Http\Requests\UserRequest;
@@ -111,6 +112,37 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function update_profil(Request $request, $id)
+    {
+        $this->validate($request, ['gambar' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',]);
+
+        $user = User::where('id', $id)->first();
+        if ($request->gambar) {
+            $foto = $request->file('gambar');
+            $destinationPath = 'images/';
+            $baseURL = url('/');
+            $profileImage = $baseURL . "/images/" . Str::slug($user->nama) . '-' . Carbon::now()->format('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $foto->move($destinationPath, $profileImage);
+            if ($user->gambar) {
+                $file_path = Str::replace($baseURL . '/images/', '', public_path() . '/images/' . $user->gambar);
+                unlink($file_path);
+            }
+            $user->update([
+                'nama' => $request->nama,
+                'gambar' => $profileImage
+            ]);
+        } else {
+            $user->update([
+                'nama' => $user->nama,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'kamu berhasil mengupdate data user',
+            'data' => $user
+        ]);
+    }
+
     public function user_data_form1(Request $request)
     {
         $userLogin = Auth::user();
@@ -166,44 +198,12 @@ class AuthController extends Controller
             $rekomendasiBeratBadan = ($user->tinggi_badan - 100) - (($user->tinggi_badan - 100) * 10 / 100);
         }
 
-        $client = new Client();
-        // dd($user);
-        $hariIni = Carbon::now()->format('l');
-        $body = [
-            'day' => $hariIni,
-            'kg' => $user->berat_badan,
-            'calories' => $user->bmr,
-        ];
-
-        $response = Http::post('https://bangkit-capstone-project-healthy-living-7ya5ntaxeq-as.a.run.app/solve', $body);
-dd($response);
-        // Mengambil respons sebagai array jika merespons dengan format JSON
-        $responseData = $response->json();
-
-        // Menyimpan respons ke dalam variabel
-        dd($responseData);
-
-        // $response = $client->request(
-        //     'post',
-        //     'https://bangkit-capstone-project-healthy-living-7ya5ntaxeq-as.a.run.app/solve',
-        //     [
-        //         RequestOptions::JSON => $body,
-        //         RequestOptions::HEADERS => [
-        //             'Content-Type' => 'application/json',
-        //             'Accept' => 'application/ld+json',
-        //         ],
-        //     ]
-        // );
-
-        // $data = json_decode($response->getBody()->getContents(), true);
-
         return response()->json([
             'message' => 'kamu berhasil mengambil form 2 data user',
             'data' => [
                 "bmr" => number_format($user->bmr, 3),
-                // "response" => $data
-                // "bmi" => number_format($user->bmi, 3),
-                // "rekomendasi_berat_badan" => $rekomendasiBeratBadan
+                "bmi" => number_format($user->bmi, 3),
+                "rekomendasi_berat_badan" => $rekomendasiBeratBadan
             ]
         ]);
     }
