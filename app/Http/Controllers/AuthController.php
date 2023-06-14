@@ -4,16 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
-use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use GuzzleHttp\RequestOptions;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -206,10 +202,6 @@ class AuthController extends Controller
                 "rekomendasi_berat_badan" => $rekomendasiBeratBadan
             ]
         ]);
-    }
-
-    public function user_data_form3()
-    {
     }
     ##end api##
 }

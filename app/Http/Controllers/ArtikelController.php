@@ -119,13 +119,5 @@ class ArtikelController extends Controller
         ]);
     }
 
-    public function detail_artikel($id)
-    {
-        $artikel = artikel::where('id',$id)->first();
-        return response()->json([
-            "message" => "kamu berhasil melihat detail data artikel",
-            "data" => $artikel
-        ]);
-    }
     ##end api##
 }

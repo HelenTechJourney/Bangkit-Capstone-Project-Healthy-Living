@@ -22,12 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('login',[AuthController::class,'login_app']);
 Route::post('daftar',[AuthController::class,'daftar']);
 
-Route::get('user_data_form2',[AuthController::class,'user_data_form2']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('user_data_form1',[AuthController::class,'user_data_form1']);
     Route::get('user_data_form2',[AuthController::class,'user_data_form2']);
-    Route::put('update_profil/{id}',[AuthController::class,'update_profil']);
+    Route::post('update_profil/{id}',[AuthController::class,'update_profil']);
 
     Route::get('me',[AuthController::class,'me']);
 
