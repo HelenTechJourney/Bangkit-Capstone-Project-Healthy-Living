@@ -76,10 +76,12 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         $user->makeHidden(['created_at', 'updated_at']);
+        $user->select('nama', 'jenis_kelamin', 'usia', 'tinggi_badan', 'berat_badan', 'aktivitas_fisik', 'bmi', 'bmr', 'email', 'roles', 'gambar');
         return response()->json([
             "message" => "data pengguna yang sedang login",
             "data" => $user
         ]);
+
     }
 
     public function daftar(UserRequest $request)
