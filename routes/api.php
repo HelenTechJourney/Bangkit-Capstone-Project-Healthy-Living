@@ -27,7 +27,7 @@ Route::get('user_data_form2',[AuthController::class,'user_data_form2']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('user_data_form1',[AuthController::class,'user_data_form1']);
     Route::get('user_data_form2',[AuthController::class,'user_data_form2']);
-    Route::post('update_profil/{id}',[AuthController::class,'update_profil']);
+    Route::put('update_profil/{id}',[AuthController::class,'update_profil']);
 
     Route::get('me',[AuthController::class,'me']);
 
