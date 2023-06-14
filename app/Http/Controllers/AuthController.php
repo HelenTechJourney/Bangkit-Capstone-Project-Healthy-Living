@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -202,8 +203,34 @@ class AuthController extends Controller
             'data' => [
                 "bmr" => number_format($user->bmr, 3),
                 "bmi" => number_format($user->bmi, 3),
-                "rekomendasi_berat_badan" => $rekomendasiBeratBadan
+                "rekomendasi_berat_badan" => $rekomendasiBeratBadan,
             ]
+        ]);
+    }
+
+    public function fungsi_ml(){
+        $userLogin = Auth::user();
+        $user = User::where('id', $userLogin->id)->first();
+        $client = new Client();
+        $url = "https://bangkit-capstone-project-healthy-living-7ya5ntaxeq-as.a.run.app/solve";
+
+        $day = Carbon::now()->format('l');
+        $body = [
+            'day' => $day,
+            'kg' => $user->berat_badan,
+            'calories' => $user->bmr,
+           ];
+
+        $response = $client->request('POST', $url, [
+            'form_params' => $body,
+            'verify'  => false,
+        ]);
+
+        $responseBody = json_decode($response->getBody());
+
+        return response()->json([
+            'message' => 'kamu berhasil mengambil form 3 data user',
+            'data' => $responseBody
         ]);
     }
     ##end api##
