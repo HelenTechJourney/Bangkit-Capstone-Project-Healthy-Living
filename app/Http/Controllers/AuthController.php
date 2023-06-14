@@ -75,6 +75,7 @@ class AuthController extends Controller
     public function me()
     {
         $user = Auth::user();
+        $user->makeHidden(['created_at', 'updated_at']);
         return response()->json([
             "message" => "data pengguna yang sedang login",
             "data" => $user
