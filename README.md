@@ -2,9 +2,10 @@
 
 <img width="152" alt="logoApp" src="https://github.com/helencodejpg/Capstone-Project-Healthy-Living/assets/128057892/86d12a35-492f-4e6d-8f83-2a59b15adb7e">
 
-# Project Description
+## Project Description
+Healthy Living apps
 
-# Capstone Team <a name="team"></a>
+## Capstone Team <a name="team"></a>
 | Bangkit-ID | Name | GitHub | LinkedIn |
 | ----- | ----- | ----- | ----- |
 | M017DSX2536 | Nikolas Notohardjo | https://github.com/Nikolas13219041 | https://linkedin.com/nikolas-notohardjo-40131a192 | 
@@ -14,5 +15,5 @@
 | C191DKY4766 | Irma Suriani S | https://github.com/irmaSurianiS | https://linkedin.com/irma-suriani-s-441305258 | 
 | A369DSY2040 | Helen Dharani Jiffri | https://github.com/helencodejpg | https://linkedin.com/helen-dharani-jiffri-aa1222238 | 
 
-# License <a name="license"></a>
+## License <a name="license"></a>
 Copyright (c) 2022 Bangkit Academy led by Google, GoTo, & Traveloka
