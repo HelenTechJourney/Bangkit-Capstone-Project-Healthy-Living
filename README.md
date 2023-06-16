@@ -1,12 +1,12 @@
 # Healthy Living
 
-<img width="152" alt="logoApp" src="https://github.com/helencodejpg/Capstone-Project-Healthy-Living/assets/128057892/86d12a35-492f-4e6d-8f83-2a59b15adb7e">
+<img width="200" alt="logoApp" src="https://github.com/helencodejpg/Capstone-Project-Healthy-Living/assets/128057892/86d12a35-492f-4e6d-8f83-2a59b15adb7e">
 
 ## Project Description
 Healthy Living is designed to help users manage their food intake in a healthier way. This application can assist users in monitoring the user's nutritional and calorie intake, making meal plans, monitoring the user's progress in achieving healthy living goals. In Healthy Living, users can enter data in the form of weight, height, and health goals. In addition, users can monitor their progress in achieving their weight goals or nutritional goals, and provide suggestions for changes to be made. This application also provides a BMI (Body Mass Index) and BMR (Basal Metabolic Rate) calculator. In addition, Healthy Living can provide dietary menu recommendations per day based on the user's calorie needs per day.
 
 ##  Project Documents
-https://drive.google.com/drive/folders/13B0S5FRvkXFywojLfPCcWrjJqT5uF6YP
+You can found our apk file to install, UI/UX design, documentation, and others related links [here](https://drive.google.com/drive/folders/13B0S5FRvkXFywojLfPCcWrjJqT5uF6YP)
 
 ## Capstone Team <a name="team"></a>
 | Bangkit-ID | Name | GitHub | LinkedIn |
