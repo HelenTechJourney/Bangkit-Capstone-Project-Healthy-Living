@@ -5,6 +5,9 @@
 ## Project Description
 Healthy Living is designed to help users manage their food intake in a healthier way. This application can assist users in monitoring the user's nutritional and calorie intake, making meal plans, monitoring the user's progress in achieving healthy living goals. In Healthy Living, users can enter data in the form of weight, height, and health goals. In addition, users can monitor their progress in achieving their weight goals or nutritional goals, and provide suggestions for changes to be made. This application also provides a BMI (Body Mass Index) and BMR (Basal Metabolic Rate) calculator. In addition, Healthy Living can provide dietary menu recommendations per day based on the user's calorie needs per day.
 
+##  Project Documents
+https://drive.google.com/drive/folders/13B0S5FRvkXFywojLfPCcWrjJqT5uF6YP
+
 ## Capstone Team <a name="team"></a>
 | Bangkit-ID | Name | GitHub | LinkedIn |
 | ----- | ----- | ----- | ----- |
