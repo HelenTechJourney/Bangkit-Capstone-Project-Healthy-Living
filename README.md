@@ -3,7 +3,7 @@
 The ML part is responsible to make a recommender system in Healthy Living apps. This recommender system will give users a daily menu of healthy food recommendations based on calories needed.
 
 ## Dataset
-We using the dataset from [Kaggle](https://www.kaggle.com/datasets/trolukovich/)
+We using the dataset from [Kaggle]([https://www.kaggle.com/datasets/trolukovich/](https://www.kaggle.com/datasets/trolukovich/nutritional-values-for-common-foods-and-products))
 
 ## Processing
 Then we used only several features from it,
