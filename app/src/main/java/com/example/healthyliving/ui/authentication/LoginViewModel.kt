@@ -1,15 +1,13 @@
-package com.example.healthyliving.ui.viewmodel
+package com.example.healthyliving.ui.authentication
 
 import androidx.lifecycle.*
 import com.example.healthyliving.remote.response.LoginResponse
-import com.example.healthyliving.remote.response.UserPreference
 import com.example.healthyliving.remote.retrofit.ApiConfig
 import com.example.healthyliving.remote.response.RequestLogin
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
-class LoginViewModel(private val pref: UserPreference) : ViewModel() {
+class LoginViewModel : ViewModel() {
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
@@ -46,44 +44,5 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
             }
 
         })
-    }
-
-    fun getLoginState(): LiveData<Boolean> {
-        return pref.getLoginState().asLiveData()
-    }
-
-    fun saveLoginState(loginState: Boolean) {
-        viewModelScope.launch {
-            pref.saveLoginState(loginState)
-        }
-    }
-
-    fun getToken(): LiveData<String> {
-        return pref.getToken().asLiveData()
-    }
-
-    fun saveToken(token: String) {
-        viewModelScope.launch {
-            pref.saveToken(token)
-        }
-    }
-    fun getName(): LiveData<String> {
-        return pref.getName().asLiveData()
-    }
-    fun saveName(token: String) {
-        viewModelScope.launch {
-            pref.saveName(token)
-        }
-    }
-}
-class ViewModelFactory(private val pref: UserPreference) :
-    ViewModelProvider.NewInstanceFactory() {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(pref) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 }

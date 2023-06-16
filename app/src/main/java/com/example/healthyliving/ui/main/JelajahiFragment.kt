@@ -13,17 +13,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthyliving.R
 import com.example.healthyliving.databinding.FragmentJelajahiBinding
+import com.example.healthyliving.di.RepoViewModelFactory
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.ArtikelItem
 import com.example.healthyliving.remote.response.UserPreference
+import com.example.healthyliving.ui.authentication.DataStoreViewModel
 import com.example.healthyliving.ui.detail.DetailArticleActivity
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
 
 class JelajahiFragment(private val dataStore: DataStore<Preferences>) : Fragment() {
 
     private lateinit var binding: FragmentJelajahiBinding
     private lateinit var token: String
-    private val viewModel: JelajahiViewModel by viewModels()
+    private val artikelViewModel: JelajahiViewModel by viewModels{
+        RepoViewModelFactory(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,19 +48,20 @@ class JelajahiFragment(private val dataStore: DataStore<Preferences>) : Fragment
         binding.root.layoutParams = layoutParams
 
         val pref = UserPreference.getInstance(dataStore)
-        val loginViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+        val viewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
-        loginViewModel.getToken().observe(viewLifecycleOwner) {
+        viewModel.getToken().observe(viewLifecycleOwner) {
             token = it
-            viewModel.getArticle(token)
+            setData(it)
+//            viewModel.getArticle(token)
         }
-        viewModel.listArticle.observe(viewLifecycleOwner) { listUser ->
-            listUser?.let{setData(it)}
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            showLoading(it)
-        }
+//        viewModel.listArticle.observe(viewLifecycleOwner) { listUser ->
+//            listUser?.let{setData(it)}
+//        }
+//        viewModel.isLoading.observe(viewLifecycleOwner) {
+//            showLoading(it)
+//        }
     }
 
     private fun showSelectedArticle(detailArticle: ArtikelItem) {
@@ -67,10 +71,17 @@ class JelajahiFragment(private val dataStore: DataStore<Preferences>) : Fragment
         startActivity(intent)
     }
 
-    private fun setData(Items: List<ArtikelItem>) {
-        val adapter = ArticleAdapter(Items)
-        binding.rvJelajahi.adapter = adapter
+    private fun setData(token:String) {
+        val adapter = ArticleAdapter(requireContext())
         binding.rvJelajahi.visibility = View.VISIBLE
+        binding.rvJelajahi.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+        artikelViewModel.getArticle(token).observe(this) {
+            adapter.submitData(lifecycle, it)
+        }
 
         adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
             override fun onItemClicked(data: ArtikelItem) {

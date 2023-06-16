@@ -9,22 +9,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.healthyliving.R
+import com.example.healthyliving.comingsoon.ChatbotActivity
+import com.example.healthyliving.comingsoon.KalkulatorActivity
 import com.example.healthyliving.ui.authentication.Login
 import com.example.healthyliving.databinding.FragmentProfileBinding
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.UserPreference
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
+import com.example.healthyliving.ui.authentication.DataStoreViewModel
 
 class ProfileFragment(private val dataStore: DataStore<Preferences>) : Fragment() {
-    private val profileViewModel : ProfileViewModel by viewModels()
     private var _binding: FragmentProfileBinding? = null
     private var isFinished = false
 
     private val binding get() = _binding!!
-    private lateinit var token: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,22 +38,26 @@ class ProfileFragment(private val dataStore: DataStore<Preferences>) : Fragment(
         super.onViewCreated(view, savedInstanceState)
 
         val pref = UserPreference.getInstance(dataStore)
-        val loginViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+        val viewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
-        loginViewModel.getName().observe(viewLifecycleOwner) {
+        viewModel.getName().observe(viewLifecycleOwner) {
             binding.username.text = StringBuilder().append(it)
         }
-        val btnCalculator = binding.kalkulator
-        val btnChatbot = binding.chatbot
-        val btnLogout = binding.Logout
-        btnCalculator.setOnClickListener{
-//            val intent = Intent(requireContext(), FormActivity::class.java)
+
+        binding.edit.setOnClickListener {
+//            val intent = Intent(requireContext(), EditActivity::class.java)
 //            startActivity(intent)
         }
-        btnChatbot.setOnClickListener{
+        binding.kalkulator.setOnClickListener{
+            val intent = Intent(requireContext(), KalkulatorActivity::class.java)
+            startActivity(intent)
         }
-        btnLogout.setOnClickListener{
+        binding.chatbot.setOnClickListener{
+            val intent = Intent(requireContext(), ChatbotActivity::class.java)
+            startActivity(intent)
+        }
+        binding.Logout.setOnClickListener{
             showAlertDialog()
         }
     }
@@ -75,9 +78,9 @@ class ProfileFragment(private val dataStore: DataStore<Preferences>) : Fragment(
 
     private fun logout() {
         val pref = UserPreference.getInstance(dataStore)
-        val loginViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
-        loginViewModel.apply {
+        val viewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
+        viewModel.apply {
             saveLoginState(false)
             saveToken("")
             saveName("")

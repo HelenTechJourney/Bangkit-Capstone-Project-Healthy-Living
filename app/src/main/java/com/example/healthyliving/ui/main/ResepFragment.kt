@@ -13,11 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthyliving.R
 import com.example.healthyliving.databinding.FragmentResepBinding
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.ResepItem
 import com.example.healthyliving.remote.response.UserPreference
+import com.example.healthyliving.ui.authentication.DataStoreViewModel
 import com.example.healthyliving.ui.detail.DetailRecipeActivity
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
 
 class ResepFragment(private val dataStore: DataStore<Preferences>) : Fragment() {
 
@@ -46,7 +46,7 @@ class ResepFragment(private val dataStore: DataStore<Preferences>) : Fragment() 
 
         val pref = UserPreference.getInstance(dataStore)
         val loginViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+            ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
         loginViewModel.getToken().observe(viewLifecycleOwner) {
             token = it

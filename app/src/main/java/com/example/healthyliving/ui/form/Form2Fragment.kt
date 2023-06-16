@@ -15,15 +15,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.healthyliving.R
 import com.example.healthyliving.databinding.FragmentForm2Binding
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.RequestForm
 import com.example.healthyliving.remote.response.UserPreference
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
+import com.example.healthyliving.ui.authentication.DataStoreViewModel
 
 @Suppress("NAME_SHADOWING")
 class Form2Fragment(private val dataStore: DataStore<Preferences>) : Fragment(), View.OnFocusChangeListener {
 
-    private val viewModel: FormViewModel by viewModels()
+    private val formViewModel: FormViewModel by viewModels()
     private var _binding: FragmentForm2Binding? = null
     private val binding get() = _binding!!
 
@@ -34,18 +34,18 @@ class Form2Fragment(private val dataStore: DataStore<Preferences>) : Fragment(),
     private lateinit var dailyActivity: String
     private lateinit var token: String
 
-    private var isAgeValid = false
+    private var isAgeValid : Boolean= false
         get() {
             checkAge()
             return field
         }
 
-    private var isWeightValid = false
+    private var isWeightValid : Boolean= false
         get() {
             checkWeight()
             return field
         }
-    private var isHeightValid = false
+    private var isHeightValid : Boolean = false
         get() {
             checkHeight()
             return field
@@ -57,17 +57,12 @@ class Form2Fragment(private val dataStore: DataStore<Preferences>) : Fragment(),
     ): View {
         requireActivity().title = "Isi User Data"
         _binding = FragmentForm2Binding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
         val pref = UserPreference.getInstance(dataStore)
-        val loginViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+        val viewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
-        loginViewModel.getToken().observe(viewLifecycleOwner) {
+        viewModel.getToken().observe(viewLifecycleOwner) {
             token = it
         }
         val genderSpinner= binding.genderSpinner
@@ -89,13 +84,18 @@ class Form2Fragment(private val dataStore: DataStore<Preferences>) : Fragment(),
 //        activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 //        binding.dailySpinner.adapter = activityAdapter
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view,savedInstanceState)
         binding.btnLanjutkan.setOnClickListener { view ->
             if (isDataValid()) {
-                gender = binding.genderSpinner.toString().trim()
+                gender = binding.genderSpinner.selectedItem.toString().trim()
                 age = binding.etAge.text.toString().trim().toInt()
                 height = binding.etHeight.text.toString().trim().toInt()
                 weight = binding.etWeight.text.toString().trim().toInt()
-                dailyActivity = binding.dailySpinner.toString().trim()
+                dailyActivity = binding.dailySpinner.selectedItem.toString().trim()
                 val data = RequestForm(
                     gender,
                     age,
@@ -104,9 +104,10 @@ class Form2Fragment(private val dataStore: DataStore<Preferences>) : Fragment(),
                     dailyActivity,
                     token
                 )
-                viewModel.getFormResponse(data)
+                formViewModel.getFormResponse(data)
             }
             view.findNavController().navigate(R.id.action_form2Fragment_to_form3Fragment)
+            return@setOnClickListener
         }
 
         binding.etAge.addTextChangedListener(object : TextWatcher {

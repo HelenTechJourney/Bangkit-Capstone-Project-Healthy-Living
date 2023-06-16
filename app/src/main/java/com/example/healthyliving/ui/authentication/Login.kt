@@ -18,9 +18,8 @@ import com.example.healthyliving.customview.CustomButton
 import com.example.healthyliving.customview.InputEmail
 import com.example.healthyliving.customview.InputPassword
 import com.example.healthyliving.databinding.ActivityLoginBinding
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.UserPreference
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
 import com.example.healthyliving.remote.response.RequestLogin
 import com.example.healthyliving.ui.main.MainActivity
 
@@ -50,7 +49,7 @@ class Login : AppCompatActivity() {
         supportActionBar?.title = "Login"
 
         val pref = UserPreference.getInstance(dataStore)
-        val viewModel = ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+        val viewModel = ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
         viewModel.getLoginState().observe(this) { state ->
             if (state) {
@@ -122,7 +121,7 @@ class Login : AppCompatActivity() {
     private fun checkResponseLogin(
         message: String,
         token: String?,
-        viewModel: LoginViewModel
+        viewModel: DataStoreViewModel
     ) {
         if (message.contains("sebagai")) {
             Toast.makeText(

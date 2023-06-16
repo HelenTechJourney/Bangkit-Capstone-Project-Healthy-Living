@@ -12,7 +12,7 @@ class FormActivity : AppCompatActivity() {
         binding = ActivityFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btBack.setOnClickListener {
+        binding.btBack.setOnClickListener{
             onBackPressed()
         }
     }

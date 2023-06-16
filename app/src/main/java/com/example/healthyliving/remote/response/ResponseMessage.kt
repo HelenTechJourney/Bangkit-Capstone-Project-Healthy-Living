@@ -19,6 +19,6 @@ data class ResultDaftar(
 	@field:SerializedName("nama")
 	val nama: String? = null,
 
-	@field:SerializedName(" token")
+	@field:SerializedName("token")
 	val token: String? = null
 )

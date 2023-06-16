@@ -13,8 +13,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FormViewModel : ViewModel(){
-    private val _listResult = MutableLiveData<List<Kalkulator>>()
-    val listResult: LiveData<List<Kalkulator>> = _listResult
+    private val _listResult = MutableLiveData<List<String>>()
+    val listResult: LiveData<List<String>> = _listResult
 
     private val _result = MutableLiveData<List<ResultForm>>()
     val result: LiveData<List<ResultForm>> = _result
@@ -25,17 +25,17 @@ class FormViewModel : ViewModel(){
     fun getFormResponse(requestForm: RequestForm) {
         _isLoading.value = true
         val api = ApiConfig.getApiService().createData(requestForm)
-        api.enqueue(object : Callback<ResponseCalculator> {
-            override fun onResponse(call: Call<ResponseCalculator>, response: Response<ResponseCalculator>) {
+        api.enqueue(object : Callback<ResponseMessage> {
+            override fun onResponse(call: Call<ResponseMessage>, response: Response<ResponseMessage>) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    _listResult.value = response.body()?.kalkulator
+                    _listResult.value = listOf(response.body()?.message.toString())
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<ResponseCalculator>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseMessage>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }

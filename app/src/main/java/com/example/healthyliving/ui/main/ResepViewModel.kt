@@ -23,19 +23,6 @@ class ResepViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     var isError: Boolean = false
-//    fun getPagingStories(token:String): LiveData<PagingData<ListStoryItem>> {
-//        @OptIn(ExperimentalPagingApi::class)
-//        return Pager(
-//            config = PagingConfig(
-//                pageSize = 5
-//            ),
-//            remoteMediator = StoryRemoteMediator(storyDatabase, apiService, token),
-//            pagingSourceFactory = {
-//                storyDatabase.storyDao().getAllListStories()
-//            }
-//        ).liveData
-//    }
-
     fun getRecipe(token: String) {
         _isLoading.value = true
         val api = ApiConfig.getApiService().getRecipe("Bearer $token")

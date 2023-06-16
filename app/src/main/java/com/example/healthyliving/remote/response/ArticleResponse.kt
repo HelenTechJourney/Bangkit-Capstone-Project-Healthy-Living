@@ -1,6 +1,8 @@
 package com.example.healthyliving.remote.response
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -9,12 +11,20 @@ data class ArticleResponse(
 	@field:SerializedName("data")
 	val data: List<ArtikelItem>,
 
+	@field:SerializedName("error")
+	val error: Boolean,
+
 	@field:SerializedName("message")
 	val message: String
 )
 
 @Parcelize
+@Entity(tableName = "article")
 data class ArtikelItem(
+	@PrimaryKey
+	@field:SerializedName("id")
+	val id: String,
+
 	@field:SerializedName("referensi")
 	val referensi: String,
 
@@ -26,9 +36,6 @@ data class ArtikelItem(
 
 	@field:SerializedName("created_at")
 	val createdAt: String,
-
-	@field:SerializedName("id")
-	val id: Int,
 
 	@field:SerializedName("deskripsi")
 	val deskripsi: String,

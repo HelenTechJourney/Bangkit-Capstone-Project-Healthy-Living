@@ -2,40 +2,58 @@ package com.example.healthyliving.remote.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import kotlinx.android.parcel.Parcelize
 
 data class RecipeResponse(
 
 	@field:SerializedName("data")
 	val data: List<ResepItem>,
 
+	@field:SerializedName("error")
+	val error: Boolean,
+
 	@field:SerializedName("message")
 	val message: String
 )
 @Parcelize
 data class ResepItem(
+    @field:SerializedName("id")
+    val id: String,
 
-	@field:SerializedName("referensi")
-	val referensi: String,
+    @field:SerializedName("referensi")
+    val referensi: String,
 
-	@field:SerializedName("updated_at")
-	val updatedAt: String,
+    @field:SerializedName("author")
+    val author: String,
 
-	@field:SerializedName("author")
-	val author: String,
+    @field:SerializedName("cara_membuats")
+    val caraMembuats: List<CaraMembuatsItem>,
 
-	@field:SerializedName("created_at")
-	val createdAt: String,
+    @field:SerializedName("deskripsi")
+    val deskripsi: String,
 
-	@field:SerializedName("id")
-	val id: Int,
+    @field:SerializedName("judul")
+    val judul: String,
+
+    @field:SerializedName("gambar")
+    val gambar: String,
+
+    @field:SerializedName("bahans")
+    val bahans: List<BahansItem>
+): Parcelable
+@Parcelize
+data class BahansItem(
+	@field:SerializedName("resep_id")
+	val resepId: Int,
 
 	@field:SerializedName("deskripsi")
-	val deskripsi: String,
+	val deskripsi: String
+): Parcelable
+@Parcelize
+data class CaraMembuatsItem(
+	@field:SerializedName("resep_id")
+	val resepId: Int,
 
-	@field:SerializedName("judul")
-	val judul: String,
-
-	@field:SerializedName("gambar")
-	val gambar: String
+	@field:SerializedName("deskripsi")
+	val deskripsi: String
 ): Parcelable

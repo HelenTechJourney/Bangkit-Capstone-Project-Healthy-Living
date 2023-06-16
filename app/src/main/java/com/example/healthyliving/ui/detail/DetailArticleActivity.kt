@@ -1,6 +1,5 @@
 package com.example.healthyliving.ui.detail
 
-import com.example.healthyliving.helper.HtmlToXmlConverter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -25,9 +24,7 @@ class DetailArticleActivity : AppCompatActivity() {
     private fun setDetailArticle(detailArticle: ArtikelItem) {
         binding.apply {
             tvDetailName.text = detailArticle.judul
-            val htmlToXmlConverter = HtmlToXmlConverter()
-            val convertedDescription = htmlToXmlConverter.convert(detailArticle.deskripsi)
-            tvDetailDescription.text = android.text.Html.fromHtml(convertedDescription).toString()
+            tvDetailDescription.text = detailArticle.deskripsi
             tvDetailReference.text = detailArticle.referensi
         }
         Glide.with(this)

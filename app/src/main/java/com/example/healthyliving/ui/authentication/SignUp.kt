@@ -12,12 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.healthyliving.R
 import com.example.healthyliving.customview.*
 import com.example.healthyliving.databinding.ActivitySignUpBinding
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.RequestSignup
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
 import com.example.healthyliving.remote.response.UserPreference
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
 import com.example.healthyliving.remote.response.RequestLogin
-import com.example.healthyliving.ui.form.FormActivity
 import com.example.healthyliving.ui.main.MainActivity
 
 class SignUp : AppCompatActivity() {
@@ -51,11 +49,11 @@ class SignUp : AppCompatActivity() {
         supportActionBar?.title = "Sign Up"
 
         val pref = UserPreference.getInstance(dataStore)
-        val viewModel = ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+        val viewModel = ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
         viewModel.getLoginState().observe(this) { state ->
             if (state) {
-                val intent = Intent(this, FormActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 finish()
@@ -73,9 +71,9 @@ class SignUp : AppCompatActivity() {
         }
 
         loginViewModel.userLogin.observe(this) {
-            loginViewModel.saveLoginState(true)
-            loginViewModel.saveToken(it.resultLogin?.token!!)
-            loginViewModel.saveName(it.resultLogin.nama!!)
+            viewModel.saveLoginState(true)
+            viewModel.saveToken(it.resultLogin?.token!!)
+            viewModel.saveName(it.resultLogin.nama!!)
 
         }
         loginViewModel.isLoading.observe(this) {

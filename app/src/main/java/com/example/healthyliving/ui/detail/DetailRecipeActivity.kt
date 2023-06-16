@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.healthyliving.databinding.ActivityDetailRecipeBinding
-import com.example.healthyliving.helper.HtmlToXmlConverter
 import com.example.healthyliving.remote.response.ResepItem
 
 @Suppress("DEPRECATION")
@@ -25,8 +24,19 @@ class DetailRecipeActivity : AppCompatActivity() {
     private fun setDetailRecipe(detailRecipe: ResepItem) {
         binding.apply {
             tvDetailName.text = detailRecipe.judul
-            val htmlToXmlConverter = HtmlToXmlConverter()
-            tvDetailDescription.text = htmlToXmlConverter.convert(detailRecipe.deskripsi)
+            tvDetailDescription.text = detailRecipe.deskripsi
+            // Mendapatkan deskripsi bahans
+            val bahansDescription = StringBuilder()
+            detailRecipe.bahans.forEach { bahansItem ->
+                bahansDescription.append("- ${bahansItem.deskripsi}\n")
+            }
+            tvDetailBahan.text = bahansDescription.toString()
+            // Mendapatkan deskripsi cara membuat
+            val caraMembuatsDescription = StringBuilder()
+            detailRecipe.caraMembuats.forEach { caraMembuatsItem ->
+                caraMembuatsDescription.append("- ${caraMembuatsItem.deskripsi}\n")
+            }
+            tvDetailCara.text=caraMembuatsDescription.toString()
             tvDetailReference.text = detailRecipe.referensi
         }
         Glide.with(this)

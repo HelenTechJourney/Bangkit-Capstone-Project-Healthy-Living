@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Healthy Living App</string>
+    <string name="app_name">Healthy Living</string>
     <string name="title_resep">Resep</string>
     <string name="title_profile">Profile</string>
     <string name="healthyliving">Healthy Living</string>
@@ -86,5 +86,12 @@
     <string name="input_age">Usia harus diisi</string>
     <string name="input_weight">Berat Badan harus diisi</string>
     <string name="input_height">Tinggi Badan harus diisi</string>
+    <string name="bahan">Bahan-bahan</string>
+    <string name="isi_bahan">isi bahan-bahan</string>
+    <string name="cara">Cara Membuat</string>
+    <string name="isi_cara">Isi cara pembuatan</string>
+    <string name="save">Simpan</string>
+    <string name="comingSoon">Coming soon</string>
+    <string name="retry">Coba lagi</string>
 
 </resources>

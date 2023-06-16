@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.detail.DetailArticleActivity">
+        tools:context=".ui.detail.DetailRecipeActivity">
         <ImageView
             android:id="@+id/iv_detail_photo"
             android:layout_width="match_parent"
@@ -49,6 +49,57 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
 
         <TextView
+            android:id="@+id/bahan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/bahan"
+            android:textAlignment="gravity"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_description" />
+
+        <TextView
+            android:id="@+id/tv_detail_bahan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/isi_bahan"
+            android:textAlignment="gravity"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/bahan" />
+        <TextView
+            android:id="@+id/cara"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/cara"
+            android:textAlignment="gravity"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_bahan" />
+
+        <TextView
+            android:id="@+id/tv_detail_cara"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/isi_cara"
+            android:textAlignment="gravity"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/cara" />
+
+        <TextView
             android:id="@+id/referensi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +110,7 @@
             android:textAlignment="gravity"
             android:textStyle="bold"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_description" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_cara" />
 
         <TextView
             android:id="@+id/tv_detail_reference"
@@ -72,6 +123,7 @@
             android:text="@string/reference_detail"
             android:textAlignment="gravity"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/referensi" />
 
         <ProgressBar

@@ -10,13 +10,13 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.healthyliving.databinding.FragmentForm3Binding
+import com.example.healthyliving.di.ViewModelFactory
 import com.example.healthyliving.remote.response.UserPreference
-import com.example.healthyliving.ui.viewmodel.LoginViewModel
-import com.example.healthyliving.ui.viewmodel.ViewModelFactory
+import com.example.healthyliving.ui.authentication.DataStoreViewModel
 
 class Form3Fragment(private val dataStore: DataStore<Preferences>) : Fragment() {
     private lateinit var binding: FragmentForm3Binding
-    private val viewModel: FormViewModel by viewModels()
+    private val formViewModel: FormViewModel by viewModels()
     private lateinit var token: String
 
     override fun onCreateView(
@@ -31,11 +31,11 @@ class Form3Fragment(private val dataStore: DataStore<Preferences>) : Fragment() 
         super.onCreate(savedInstanceState)
         val pref = UserPreference.getInstance(dataStore)
         val loginViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[LoginViewModel::class.java]
+            ViewModelProvider(this, ViewModelFactory(pref))[DataStoreViewModel::class.java]
 
         loginViewModel.getToken().observe(viewLifecycleOwner) {
             token = it
-            viewModel.getResult(token)
+            formViewModel.getResult(token)
         }
     }
 
