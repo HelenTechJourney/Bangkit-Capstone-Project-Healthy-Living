@@ -9,7 +9,7 @@ Healthy Living is designed to help users manage their food intake in a healthier
 | Bangkit-ID | Name | GitHub | LinkedIn |
 | ----- | ----- | ----- | ----- |
 | M017DSX2536 | Nikolas Notohardjo | https://github.com/Nikolas13219041 | https://linkedin.com/nikolas-notohardjo-40131a192 | 
-| M097DSX1289 | Andrew Nagata | https://github.com/ | https://linkedin.com/andrew-nagata | 
+| M097DSX1289 | Andrew Nagata | https://github.com/uzenn | https://linkedin.com/andrew-nagata | 
 | M151DSY0449 | Shafatyra Reditha Shalsadilla | https://github.com/shafare | https://linkedin.com/shafaresha | 
 | C191DKX4738 | Muiz Muharram | https://github.com/Muiz021 | https://linkedin.com/muiz-muharram-428238222 | 
 | C191DKY4766 | Irma Suriani S | https://github.com/irmaSurianiS | https://linkedin.com/irma-suriani-s-441305258 | 
