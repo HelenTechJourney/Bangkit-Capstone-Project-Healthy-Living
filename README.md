@@ -7,6 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-Account:
-email   : admin@admin.com
-password: 123
+<p>Account:</p>
+<p>Email   : admin@admin.com</p>
+<p>Password: 123</p>
