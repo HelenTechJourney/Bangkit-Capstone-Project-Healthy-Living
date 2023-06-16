@@ -3,7 +3,7 @@ import pandas as pd
 from pulp import * 
 import json
 
-path = 'processed_dataset.csv'
+path = 'data/processed_dataset.csv'
 dfd = pd.read_csv(path)
 
 def build_nutritional_values(kg, calories):
