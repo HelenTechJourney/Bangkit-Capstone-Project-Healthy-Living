@@ -16,7 +16,7 @@ You can found our apk file to install, UI/UX design, documentation, and other re
 | M151DSY0449 | Shafatyra Reditha Shalsadilla | https://github.com/shafare | https://linkedin.com/shafaresha | 
 | C191DKX4738 | Muiz Muharram | https://github.com/Muiz021 | https://linkedin.com/muiz-muharram-428238222 | 
 | C191DKY4766 | Irma Suriani S | https://github.com/irmaSurianiS | https://linkedin.com/irma-suriani-s-441305258 | 
-| A369DSY2040 | Helen Dharani Jiffri | https://github.com/helencodejpg | https://linkedin.com/helen-dharani-jiffri-aa1222238 | 
+| A369DSY2040 | Helen Dharani Jiffri | https://github.com/HelenTechJourney | https://linkedin.com/helen-dharani-jiffri-aa1222238 | 
 
 ## License <a name="license"></a>
 Copyright (c) 2023 Bangkit Academy led by Google, GoTo, & Traveloka
